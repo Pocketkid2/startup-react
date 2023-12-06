@@ -80,9 +80,9 @@ function App() {
 	return (
 		<BrowserRouter>
 			<div className="app">
-				<div>
+				<div className="nav-bar">
 					<img src={CameraRollIcon} alt="Camera Roll Icon" />
-					<nav className="nav-bar">
+					<nav>
 						{nav_items.map((item, index) => {
 							return (
 								<NavLink
