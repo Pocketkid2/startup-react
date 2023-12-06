@@ -2,6 +2,9 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 
+import GitHubLogoDark from './assets/github-mark.svg'
+import GitHubLogoLight from './assets/github-mark-white.svg'
+
 import './App.css'
 
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
@@ -74,19 +77,25 @@ function App() {
 	return (
 		<BrowserRouter>
 			<div className="app">
-				<nav>
-					{nav_items.map((item, index) => {
-						return (
-							<NavLink
-								key={index}
-								to={item.route}
-								onClick={item.onClick}>
-								{item.name}
-							</NavLink>
-						)
-					})}
-				</nav>
-				<main>
+				<div>
+					{/* <img> PUT FILM LOGO HERE </img> */}
+					<nav className="nav-bar">
+						{nav_items.map((item, index) => {
+							return (
+								<NavLink
+									key={index}
+									to={item.route}
+									onClick={item.onClick}
+									className="nav-button">
+									{item.name}
+								</NavLink>
+							)
+						})}
+					</nav>
+					{/* <img> PUT FILM LOGO HERE </img> */}
+				</div>
+
+				<main className="main-content">
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/search" element={<Search />} />
@@ -97,8 +106,11 @@ function App() {
 						<Route path="*" element={<Navigate to="/" replace />} />
 					</Routes>
 				</main>
-				<footer>
-					Footer
+				<footer className="footer">
+					<p>Adam Taylor</p>
+					<a href="https://github.com/Pocketkid2/startup-react">
+						<img src={GitHubLogoDark} alt="GitHub Repository" />
+					</a>
 				</footer>
 			</div>
 		</BrowserRouter>
