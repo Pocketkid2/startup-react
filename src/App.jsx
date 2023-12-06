@@ -5,6 +5,9 @@
 import GitHubLogoDark from './assets/github-mark.svg'
 import GitHubLogoLight from './assets/github-mark-white.svg'
 
+import CameraRollIcon from './assets/camera-roll-icon.svg'
+import FilmMovieIcon from './assets/film-movie-icon.svg'
+
 import './App.css'
 
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
@@ -78,7 +81,7 @@ function App() {
 		<BrowserRouter>
 			<div className="app">
 				<div>
-					{/* <img> PUT FILM LOGO HERE </img> */}
+					<img src={CameraRollIcon} alt="Camera Roll Icon" />
 					<nav className="nav-bar">
 						{nav_items.map((item, index) => {
 							return (
@@ -92,7 +95,7 @@ function App() {
 							)
 						})}
 					</nav>
-					{/* <img> PUT FILM LOGO HERE </img> */}
+					<img src={FilmMovieIcon} alt="Film Movie Icon" />
 				</div>
 
 				<main className="main-content">
