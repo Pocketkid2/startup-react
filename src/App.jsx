@@ -11,6 +11,7 @@ import FilmMovieIcon from './assets/film-movie-icon.svg'
 import './App.css'
 
 import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import React from 'react';
 
 function Home() {
 	return (
@@ -77,6 +78,33 @@ function App() {
 		alert('Logout triggered');
 	}
 
+	function GitHubLogo() {
+		const [is_dark_mode, set_is_dark_mode] = React.useState(
+			window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+		);
+	
+		React.useEffect(() => {
+			const matcher = window.matchMedia('(prefers-color-scheme: dark)');
+			const on_change = () => set_is_dark_mode(matcher.matches);
+
+			matcher.addEventListener('change', on_change);
+
+			return () => {
+				matcher.removeEventListener('change', on_change);
+			};
+		}, []);
+
+		return is_dark_mode ? (
+			<a href="https://github.com/Pocketkid2/startup-react">
+				<img src={GitHubLogoLight} alt="GitHub Repository" />
+			</a>
+		) : (
+			<a href="https://github.com/Pocketkid2/startup-react">
+				<img src={GitHubLogoDark} alt="GitHub Repository" />
+			</a>
+		);
+	}
+
 	return (
 		<BrowserRouter>
 			<div className="app">
@@ -111,9 +139,7 @@ function App() {
 				</main>
 				<footer className="footer">
 					<p>Adam Taylor</p>
-					<a href="https://github.com/Pocketkid2/startup-react">
-						<img src={GitHubLogoDark} alt="GitHub Repository" />
-					</a>
+					<GitHubLogo />
 				</footer>
 			</div>
 		</BrowserRouter>
