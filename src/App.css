@@ -4,6 +4,7 @@
 	background: white;
 	color: black;
 	font-family: 'Poppins', sans-serif;
+	font-size: 1vw;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -119,7 +120,7 @@ body {
 }
 
 .footer p {
-	margin-right: 1em;
+	margin: .5em;
 	padding: 0;
 
 	font-size: 2em;
