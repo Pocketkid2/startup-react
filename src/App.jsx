@@ -10,8 +10,10 @@ import FilmMovieIcon from './assets/film-movie-icon.svg'
 
 import './App.css'
 
-import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import React from 'react';
+
+import SimpleForm from './SimpleForm';
 
 function Home() {
 	return (
@@ -45,44 +47,71 @@ function Profile() {
 	);
 }
 
-function Login() {
-	return (
-		<div>
-			<h1>Login Component</h1>
-		</div>
-	);
-}
 
-function Signup() {
-	return (
-		<div>
-			<h1>Signup Component</h1>
-		</div>
-	);
-}
+
+
 
 function App() {
-	const nav_items = [
-		{ name: 'Home', route: '/' },
-		{ name: 'Search', route: '/search' },
-		{ name: 'Chat', route: '/chat' },
-		{ name: 'Profile', route: '/profile' },
-		{ name: 'Login', route: '/login' },
-		{ name: 'Signup', route: '/signup' },
-		{ name: 'Logout', route: '/logout', onClick: handleLogout }
-	];
+	const [is_logged_in, set_is_logged_in] = React.useState(false);
 
+	const navigate = useNavigate();
+
+	// Remove authentication token
 	function handleLogout(event) {
 		event.preventDefault();
-		console.log('Logout');
 		alert('Logout triggered');
+		set_is_logged_in(false);
+
+		navigate('/');
+	}
+
+	// Submit the username and password to the backend
+	function authenticate(form) {
+		alert('Sending form: ' + JSON.stringify(form));
+		set_is_logged_in(true);
+
+		navigate('/profile');
+		// fetch('http://localhost:4000/auth/login', {
+		// 	method: 'POST',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify(form)
+		// })
+		// 	.then(response => response.json())
+		// 	.then(data => {
+		// 		console.log(data);
+		// 		if (data.success) {
+		// 			set_is_logged_in(true);
+		// 		} else {
+		// 			alert(data.message);
+		// 		}
+		// })
+	}
+
+	// Return which navigation items should be visible
+	function get_nav_items(authenticated) {
+		const nav_items = [
+			{ name: 'Home', route: '/' },
+			{ name: 'Search', route: '/search' },
+		];
+		if (authenticated) {
+			return nav_items.concat([
+				{ name: 'Chat', route: '/chat' },
+				{ name: 'Profile', route: '/profile' },
+				{ name: 'Logout', route: '/logout', onClick: handleLogout }
+			]);
+		} else {
+			return nav_items.concat([
+				{ name: 'Login', route: '/login' },
+				{ name: 'Signup', route: '/signup' },
+			]);
+		}
 	}
 
 	function GitHubLogo() {
 		const [is_dark_mode, set_is_dark_mode] = React.useState(
 			window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 		);
-	
+
 		React.useEffect(() => {
 			const matcher = window.matchMedia('(prefers-color-scheme: dark)');
 			const on_change = () => set_is_dark_mode(matcher.matches);
@@ -106,43 +135,42 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter>
-			<div className="app">
-				<div className="nav-bar">
-					<img src={CameraRollIcon} alt="Camera Roll Icon" />
-					<nav>
-						{nav_items.map((item, index) => {
-							return (
-								<NavLink
-									key={index}
-									to={item.route}
-									onClick={item.onClick}
-									className="nav-button">
-									{item.name}
-								</NavLink>
-							)
-						})}
-					</nav>
-					<img src={FilmMovieIcon} alt="Film Movie Icon" />
-				</div>
 
-				<main className="main-content">
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/search" element={<Search />} />
-						<Route path="/chat" element={<Chat />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<Signup />} />
-						<Route path="*" element={<Navigate to="/" replace />} />
-					</Routes>
-				</main>
-				<footer className="footer">
-					<p>Adam Taylor</p>
-					<GitHubLogo />
-				</footer>
+		<div className="app">
+			<div className="nav-bar">
+				<img src={CameraRollIcon} alt="Camera Roll Icon" />
+				<nav>
+					{get_nav_items(is_logged_in).map((item, index) => {
+						return (
+							<NavLink
+								key={index}
+								to={item.route}
+								onClick={item.onClick}
+								className="nav-button">
+								{item.name}
+							</NavLink>
+						)
+					})}
+				</nav>
+				<img src={FilmMovieIcon} alt="Film Movie Icon" />
 			</div>
-		</BrowserRouter>
+
+			<main className="main-content">
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/search" element={<Search />} />
+					<Route path="/chat" element={<Chat />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/login" element={<SimpleForm form_name="Login" process_submit={authenticate} />} />
+					<Route path="/signup" element={<SimpleForm form_name="Signup" process_submit={authenticate} />} />
+					<Route path="*" element={<Navigate to="/" replace />} />
+				</Routes>
+			</main>
+			<footer className="footer">
+				<p>Adam Taylor</p>
+				<GitHubLogo />
+			</footer>
+		</div>
 	)
 }
 
