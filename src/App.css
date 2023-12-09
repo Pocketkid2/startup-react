@@ -29,14 +29,13 @@ body {
 
 .nav-bar {
 	flex: 0 0 auto;
-
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
-
 	background: #cccccc;
+	padding: .25em;
 }
 
 .nav-bar nav {
@@ -63,10 +62,13 @@ body {
 	background: #BBBBBB;
 }
 
+.nav-bar a:active {
+	background: #AAAAAA;
+}
+
 .nav-bar img {
 	width: 5em;
 	height: 5em;
-
 	margin: .5em;
 }
 
@@ -86,6 +88,10 @@ body {
 		background: #222222;
 	}
 
+	.nav-bar a:active {
+		background: #333333;
+	}
+
 	.nav-bar img {
 		filter: invert(1);
 	}
@@ -96,20 +102,18 @@ body {
 .main-content {
 	overflow-y: auto;
 	flex-grow: 1;
+	display: flex;
 }
 
 /* FOOTER --------------------------------------------------------------------- */
 
 .footer {
 	flex: 0 0 auto;
-
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-
 	padding: 0;
-
 	background: #cccccc;
 }
 
@@ -137,4 +141,92 @@ body {
 .footer img {
 	width: 3em;
 	height: 3em;
+}
+
+/* SIMPLE FORM ---------------------------------------------------------------- */
+
+.simple-form {
+	display: inline-block;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 5em auto;
+	padding: auto;
+}
+
+.simple-form form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	border-radius: 2em;
+	box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
+	background: #cccccc;
+}
+
+.simple-form form input {
+	margin: .5em 2em;
+	padding: .5em;
+	font-size: 3em;
+	border: none;
+	background: white;
+	box-shadow: 0 0 1em rgba(128, 128, 128, 0.3);
+}
+
+.simple-form form label {
+	margin-top: 1em;
+	margin-bottom: 0;
+	padding: .5em;
+	font-size: 3em;
+}
+
+.simple-form form button {
+	margin: 1.5em;
+	padding: .5em 1.5em;
+	font-size: 4em;
+	border-radius: .25em;
+	border: none;
+	background: #999999;
+	box-shadow: 0 0 1em rgba(128, 128, 128, 0.3);
+}
+
+.simple-form form button:hover {
+	cursor: pointer;
+	background: #888888;
+}
+
+.simple-form form button:active {
+	background: #777777;
+}
+
+@media (prefers-color-scheme: dark) {
+	.simple-form form {
+		background: #141414;
+
+		box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
+	}
+
+	.simple-form form input {
+		color: white;
+		border: none;
+		background: #222222;
+		box-shadow: 0 0 .5em rgba(0, 0, 0, 0.3);
+	}
+
+	.simple-form form button {
+		border: none;
+		background: #333333;
+		color: white;
+		box-shadow: 0 0 .5em rgba(0, 0, 0, 0.3);
+	}
+
+	.simple-form form button:hover {
+		cursor: pointer;
+		background: #444444;
+	}
+
+	.simple-form form button:active {
+		background: #555555;
+	}
 }
