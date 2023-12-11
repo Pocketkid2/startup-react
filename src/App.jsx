@@ -10,19 +10,12 @@ import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import React from 'react';
 
 import SimpleForm from './components/SimpleForm';
+import Search from './components/Search'
 
 function Home() {
 	return (
 		<div>
 			<h1>Home Component</h1>
-		</div>
-	);
-}
-
-function Search() {
-	return (
-		<div>
-			<h1>Search Component</h1>
 		</div>
 	);
 }
@@ -42,10 +35,6 @@ function Profile() {
 		</div>
 	);
 }
-
-
-
-
 
 function App() {
 	const [is_logged_in, set_is_logged_in] = React.useState(false);

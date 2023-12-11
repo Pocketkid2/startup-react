@@ -1,0 +1,19 @@
+.search-tool {
+    border: 1px solid black;
+    background: green;
+}
+
+.search-bar {
+    border: 1px solid black;
+    background: red;
+}
+
+.search-filter {
+    border: 1px solid black;
+    background: yellow;
+}
+
+.search-results {
+    border: 1px solid black;
+    background: blue;
+}
