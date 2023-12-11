@@ -1,7 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-
 import GitHubLogoDark from './assets/github-mark.svg'
 import GitHubLogoLight from './assets/github-mark-white.svg'
 
@@ -10,10 +6,10 @@ import FilmMovieIcon from './assets/film-movie-icon.svg'
 
 import './App.css'
 
-import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import React from 'react';
 
-import SimpleForm from './SimpleForm';
+import SimpleForm from './components/SimpleForm';
 
 function Home() {
 	return (
