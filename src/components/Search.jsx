@@ -15,8 +15,6 @@ export default function Search() {
 			if (response.ok) {
 				const data = await response.json();
 
-				console.log(data);
-
 				set_search_results(search_results => [...search_results, {
 					title: data.Title,
 					year: data.Year,
@@ -27,10 +25,14 @@ export default function Search() {
 				console.log('Error: ' + response.status, response.statusText);
 			}
 		});
+
+		console.log('Done loading search results');
 	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+
+		set_search_results([]);
 
 		const query = encodeURIComponent(search_term);
 
@@ -39,18 +41,16 @@ export default function Search() {
 		if (response.ok) {
 			const data = await response.json();
 
-			console.log(data);
+			if (data.Response === 'False') {
+				return;
+			}
 
 			const id_list = data.Search.map(result => result.imdbID);
-
-			console.log(JSON.stringify(id_list));
 
 			load_search_results(id_list);
 		} else {
 			console.log('Error: ' + response.status, response.statusText);
 		}
-
-
 	}
 
 	function handleSearchBarChange(event) {
@@ -84,18 +84,28 @@ export default function Search() {
 			</div>
 			<div className="search-results">
 				<table>
-					{
-						search_results.map((result, index) => {
-							return (
-								<tr key={index}>
-									<td>{result.title}</td>
-									<td>{result.year}</td>
-									<td>{result.runtime}</td>
-									<td>{result.rating}</td>
-								</tr>
-							);
-						})
-					}
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Year</th>
+							<th>Runtime</th>
+							<th>Rating</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							search_results.map((result, index) => {
+								return (
+									<tr key={index}>
+										<td>{result.title}</td>
+										<td>{result.year}</td>
+										<td>{result.runtime}</td>
+										<td>{result.rating}</td>
+									</tr>
+								);
+							})
+						}
+					</tbody>
 				</table>
 			</div>
 		</div>
