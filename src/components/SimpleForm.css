@@ -1,0 +1,87 @@
+/* SIMPLE FORM ---------------------------------------------------------------- */
+
+.simple-form {
+	display: inline-block;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 5em auto;
+	padding: auto;
+}
+
+.simple-form form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	border-radius: 2em;
+	box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
+	background: #cccccc;
+}
+
+.simple-form form input {
+	margin: .5em 2em;
+	padding: .5em;
+	font-size: 3em;
+	border: none;
+	background: white;
+	box-shadow: 0 0 1em rgba(128, 128, 128, 0.3);
+}
+
+.simple-form form label {
+	margin-top: 1em;
+	margin-bottom: 0;
+	padding: .5em;
+	font-size: 3em;
+}
+
+.simple-form form button {
+	margin: 1.5em;
+	padding: .5em 1.5em;
+	font-size: 4em;
+	border-radius: .25em;
+	border: none;
+	background: #999999;
+	box-shadow: 0 0 1em rgba(128, 128, 128, 0.3);
+}
+
+.simple-form form button:hover {
+	cursor: pointer;
+	background: #888888;
+}
+
+.simple-form form button:active {
+	background: #777777;
+}
+
+@media (prefers-color-scheme: dark) {
+	.simple-form form {
+		background: #141414;
+
+		box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
+	}
+
+	.simple-form form input {
+		color: white;
+		border: none;
+		background: #222222;
+		box-shadow: 0 0 .5em rgba(0, 0, 0, 0.3);
+	}
+
+	.simple-form form button {
+		border: none;
+		background: #333333;
+		color: white;
+		box-shadow: 0 0 .5em rgba(0, 0, 0, 0.3);
+	}
+
+	.simple-form form button:hover {
+		cursor: pointer;
+		background: #444444;
+	}
+
+	.simple-form form button:active {
+		background: #555555;
+	}
+}

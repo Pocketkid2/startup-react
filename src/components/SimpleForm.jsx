@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './SimpleForm.css'
+
 export default function SimpleForm({ form_name, process_submit }) {
 	const [form, setForm] = React.useState({});
 
