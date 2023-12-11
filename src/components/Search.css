@@ -1,19 +1,284 @@
 .search-tool {
-    border: 1px solid black;
-    background: green;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5em;
+    padding: 0;
+    border-radius: 2em;
+    background: #cccccc;
+    box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
 }
+
+@media (prefers-color-scheme: dark) {
+    .search-tool {
+        background: #141414;
+        box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* SEARCH BAR SEGMENT --------------------------------------------------------- */
 
 .search-bar {
-    border: 1px solid black;
-    background: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+    background: #999999;
+    border-radius: .7em;
+    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
 }
+
+.search-bar form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar form input {
+    font-size: 2em;
+    margin: .7em;
+    padding: .2em;
+    border: none;
+    box-shadow: 0 0 .5em rgba(128, 128, 128, 0.8);
+}
+
+.search-bar form button {
+    font-size: 2em;
+    margin: .7em;
+    padding: .2em .5em;
+    border: none;
+    box-shadow: 0 0 .5em rgba(128, 128, 128, 0.8);
+}
+
+.search-bar form button:hover {
+    background: #cccccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    .search-bar {
+        background: #2A2A2A;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+    }
+
+    .search-bar form input {
+        color: #dddddd;
+        background: #444444;
+        box-shadow: 0 0 .5em rgba(0, 0, 0, 0.5);
+    }
+
+    .search-bar form button {
+        color: #dddddd;
+        background: #444444;
+        box-shadow: 0 0 .5em rgba(0, 0, 0, 0.5);
+    }
+
+    .search-bar form button:hover {
+        background: #5A5A5A;
+    }
+}
+
+/* SEARCH FILTER SEGMENT ------------------------------------------------------ */
 
 .search-filter {
-    border: 1px solid black;
-    background: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+    padding: 1em;
+    background: #999999;
+    border-radius: .7em;
+    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
 }
 
+.search-filter h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 0;
+}
+
+.search-filter form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-filter fieldset {
+    margin: 1em;
+}
+
+.search-filter legend {
+    font-size: 2em;
+}
+
+.search-filter-numerical-inputs {
+    display: flex;
+}
+
+.search-filter-numerical-inputs div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.search-filter-numerical-inputs label {
+    font-size: 2em;
+}
+
+.search-filter-numerical-inputs input {
+    font-size: 2em;
+    margin: .4em;
+    padding: .2em;
+    border: none;
+    box-shadow: 0 0 .5em rgba(128, 128, 128, 0.8);
+}
+
+.search-filter input[type="checkbox"] {
+    display: none;
+}
+
+.search-filter input[type="checkbox"] + label {
+    padding: .5em 1.5em;
+    margin: .2em;
+    display: inline-block;
+    font-size: 1.8em;
+    font-weight: bold;
+    border-radius: .7em;
+    box-shadow: 0 0 .5em rgba(128, 128, 128, 0.8);
+}
+
+.search-filter input[type="checkbox"]:hover + label {
+    cursor: pointer;
+    background: #888888;
+}
+
+.search-filter input[type="checkbox"]:checked + label {
+    background: #222222;
+    color: white;
+}
+
+.search-filter input[type="checkbox"]:checked + label:hover {
+    background: #444444;
+}
+
+@media (prefers-color-scheme: dark) {
+    .search-filter {
+        color: #dddddd;
+        background: #2A2A2A;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+    }
+
+    .search-filter fieldset {
+        color: #bbbbbb;
+        border-color: #888888;
+    }
+
+    .search-filter-numerical-inputs input {
+        background: #444444;
+        box-shadow: 0 0 .5em rgba(0, 0, 0, 0.3);
+    }
+
+    .search-filter input[type="checkbox"] + label {
+        color: #eeeeee;
+        background: #454545;
+        box-shadow: 0 0 .5em rgba(0, 0, 0, 0.5);
+    }
+
+    .search-filter input[type="checkbox"]:hover + label {
+        background: #666666;
+    }
+
+    .search-filter input[type="checkbox"]:checked + label {
+        color: #222222;
+        background: #aaaaaa;
+    }   
+
+    .search-filter input[type="checkbox"]:checked + label:hover {
+        background: #999999;
+    }
+
+}
+
+/* SEARCH RESULTS SEGMENT ----------------------------------------------------- */
+
 .search-results {
-    border: 1px solid black;
-    background: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+    padding: 1em;
+    background: #999999;
+    border-radius: .7em;
+    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
+}
+
+.search-results h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 0;
+}
+
+.search-results table {
+    font-size: 2em;
+    margin: .7em;
+    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
+}
+
+.search-results button {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: none;
+    font-size: 1em;
+    border-radius: none;
+    border: none;
+}
+
+.search-results th:hover {
+    background: #dddddd;
+    cursor: pointer;
+}
+
+.search-results th {
+    background: #cccccc;
+    padding: 0;
+}
+
+.search-results td {
+    background: white;
+    padding: 0 .35em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .search-results {
+        background: #2A2A2A;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+    }
+
+    .search-results table {
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+    }
+
+    .search-results th {
+        background: #363636;
+    }
+
+    .search-results button {
+        color: #cccccc;
+    }
+
+    .search-results th:hover {
+        background: #484848;
+    }
+
+    .search-results td {
+        background: #444444;
+    }   
 }
