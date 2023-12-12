@@ -23,23 +23,22 @@
 .simple-form form input {
 	margin: .5em 2em;
 	padding: .5em;
-	font-size: 3em;
+	font-size: 2em;
 	border: none;
 	background: white;
 	box-shadow: 0 0 1em rgba(128, 128, 128, 0.3);
 }
 
 .simple-form form label {
-	margin-top: 1em;
-	margin-bottom: 0;
+	margin: 0;
 	padding: .5em;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 .simple-form form button {
-	margin: 1.5em;
+	margin: .5em 1.5em;
 	padding: .5em 1.5em;
-	font-size: 4em;
+	font-size: 2.5em;
 	border-radius: .25em;
 	border: none;
 	background: #999999;
