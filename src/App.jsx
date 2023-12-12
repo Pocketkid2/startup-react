@@ -31,15 +31,34 @@ function Profile() {
 
 function App() {
 	const [is_logged_in, set_is_logged_in] = React.useState(false);
-
 	const navigate = useNavigate();
 
-	// Remove authentication token
-	function handleLogout(event) {
-		event.preventDefault();
-		alert('Logout triggered');
-		set_is_logged_in(false);
+	React.useEffect(() => {
+		// Check if the user is logged in
+		async function check_login_status() {
+			const response = await fetch('/auth/login', {
+				method: 'POST'
+			});
+			if (response.ok) {
+				set_is_logged_in(true);
+			}
+		}
 
+		check_login_status();
+	}, []);
+
+	// Remove authentication token
+	async function handleLogout(event) {
+		event.preventDefault();
+		const response = await fetch('/auth/logout', {
+			method: 'DELETE'
+		});
+		if (response.ok) {
+			set_is_logged_in(false);
+		} else {
+			const response_body = await response.text();
+			console.log('Error: ' + response.status, response_body);
+		}
 		navigate('/');
 	}
 
@@ -48,7 +67,7 @@ function App() {
 		console.log(JSON.stringify(form));
 		let response;
 		if (create_new_user) {
-			response = await fetch('https://startup.filmhub.click/auth/signup', {
+			response = await fetch('/auth/signup', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -56,7 +75,7 @@ function App() {
 				body: JSON.stringify(form),
 			});
 		} else {
-			response = await fetch('https://startup.filmhub.click/auth/login', {
+			response = await fetch('/auth/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -68,7 +87,8 @@ function App() {
 			set_is_logged_in(true);
 			navigate('/profile');
 		} else {
-			console.log('Error: ' + response.status, response.statusText);
+			const response_body = await response.text();
+			console.log('Error: ' + response.status, response_body);
 		}
 	}
 
