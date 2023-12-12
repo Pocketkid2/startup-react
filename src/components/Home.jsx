@@ -95,7 +95,7 @@ export default function Home() {
 							<a href={links[index]}>
 								<img src={img_links[index]} title={img_alts[index]} />
 							</a>
-							<h3>{img_desc[index]}</h3>
+							<h2>{img_desc[index]}</h2>
 						</li>
 					))
 				}
@@ -108,7 +108,7 @@ export default function Home() {
 			{
 				curated_data.map((section) => {
 					return (
-						<div className="home-subcomponent">
+						<div className="home-section">
 							<h1>{section.header}</h1>
 							<List ids={section.ids} links={section.links} descriptor={section.descriptor}/>
 						</div>
