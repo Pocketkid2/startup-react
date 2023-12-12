@@ -44,25 +44,32 @@ function App() {
 	}
 
 	// Submit the username and password to the backend
-	function authenticate(form) {
-		alert('Sending form: ' + JSON.stringify(form));
-		set_is_logged_in(true);
-
-		navigate('/profile');
-		// fetch('http://localhost:4000/auth/login', {
-		// 	method: 'POST',
-		// 	headers: { 'Content-Type': 'application/json' },
-		// 	body: JSON.stringify(form)
-		// })
-		// 	.then(response => response.json())
-		// 	.then(data => {
-		// 		console.log(data);
-		// 		if (data.success) {
-		// 			set_is_logged_in(true);
-		// 		} else {
-		// 			alert(data.message);
-		// 		}
-		// })
+	async function authenticate(form, create_new_user) {
+		console.log(JSON.stringify(form));
+		let response;
+		if (create_new_user) {
+			response = await fetch('https://startup.filmhub.click/auth/signup', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(form),
+			});
+		} else {
+			response = await fetch('https://startup.filmhub.click/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(form),
+			});
+		}
+		if (response.ok) {
+			set_is_logged_in(true);
+			navigate('/profile');
+		} else {
+			console.log('Error: ' + response.status, response.statusText);
+		}
 	}
 
 	// Return which navigation items should be visible
@@ -132,15 +139,14 @@ function App() {
 				</nav>
 				<img src={FilmMovieIcon} alt="Film Movie Icon" />
 			</div>
-
 			<main className="main-content">
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/search" element={<Search />} />
 					<Route path="/chat" element={<Chat />} />
 					<Route path="/profile" element={<Profile />} />
-					<Route path="/login" element={<SimpleForm form_name="Login" process_submit={authenticate} />} />
-					<Route path="/signup" element={<SimpleForm form_name="Signup" process_submit={authenticate} />} />
+					<Route path="/login" element={<SimpleForm form_name="Login" process_submit={(event) => authenticate(event, false)} />} />
+					<Route path="/signup" element={<SimpleForm form_name="Signup" process_submit={(event) => authenticate(event, true)} />} />
 					<Route path="*" element={<Navigate to="/" replace />} />
 				</Routes>
 			</main>
