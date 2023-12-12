@@ -106,11 +106,15 @@ async function user_exists(username) {
 }
 
 async function add_user(user_object) {
-    bcrypt.hash(user_object.password, 10, async function(err, hash) {
-        user_object.password = hash;
-        await user_collection.insertOne(user_object);
-        console.log(`Added user ${user_object.username}`);
-    });
+    user_object.password = await new Promise((resolve, reject) => {
+        bcrypt.hash(user_object.password, 10, function(err, hash) {
+            if (err) reject(err);
+            else resolve(hash);
+        });
+    })
+
+    await user_collection.insertOne(user_object);
+    console.log(`Added user ${user_object.username}`);
 }
 
 // Attempts to authenticate with the given credentials.
