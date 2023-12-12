@@ -11,14 +11,7 @@ import React from 'react';
 
 import SimpleForm from './components/SimpleForm';
 import Search from './components/Search'
-
-function Home() {
-	return (
-		<div>
-			<h1>Home Component</h1>
-		</div>
-	);
-}
+import Home from './components/Home'
 
 function Chat() {
 	return (
