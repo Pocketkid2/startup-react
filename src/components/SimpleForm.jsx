@@ -34,6 +34,5 @@ export default function SimpleForm({ form_name, process_submit }) {
 				<button type="submit">{form_name}</button>
 			</form>
 		</div>
-
 	);
 }
