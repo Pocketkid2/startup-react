@@ -50,7 +50,6 @@ function App() {
 
 	// Submit the username and password to the backend
 	async function authenticate(form, create_new_user) {
-		console.log(JSON.stringify(form));
 		let response;
 		if (create_new_user) {
 			response = await fetch('/auth/signup', {
