@@ -4,9 +4,12 @@ import './Search.css'
 
 import api_keys from '../api_keys.json';
 
-export default function Search() {
+export default function Search({ is_logged_in }) {
 	const [search_results, set_search_results] = React.useState([]);
 	const [search_term, set_search_term] = React.useState('');
+
+	const [favorites, set_favorites] = React.useState(new Set());
+	const [watchlist, set_watchlist] = React.useState(new Set());
 
 	const [runtime_min, set_runtime_min] = React.useState('');
 	const [runtime_max, set_runtime_max] = React.useState('');
@@ -66,15 +69,78 @@ export default function Search() {
 		}
 	}
 
+	const columns = [
+		{ field: 'title', label: 'Title' },
+		{ field: 'year', label: 'Year' },
+		{ field: 'runtime', label: 'Runtime' },
+		{ field: 'rating', label: 'Rating' },
+		{ field: 'director', label: 'Director' }
+	];
+
+	function film_to_string(film) {
+		return `${film.title} (${film.year}) (${film.runtime}) (${film.rating})`;
+	}
+
+	React.useEffect(() => {
+		if (is_logged_in) {
+			async function get_list(list_name) {
+				const response = await fetch(`/api/list/${list_name}`, {
+					method: 'GET',
+				});
+				if (response.ok) {
+					const data = await response.json();
+					return data;
+				} else {
+					const error_msg = await response.text();
+					console.log('Error: ' + response.status, error_msg);
+				}
+			}
+
+			get_list('favorites').then((data) => set_favorites(new Set(data.map(film_to_string))));
+			get_list('watchlist').then((data) => set_watchlist(new Set(data.map(film_to_string))));
+		}
+	}, []);
+
+	function AddRemoveButton({ list, set_list, list_name, item }) {
+		return (
+			<input
+				type="checkbox"
+				checked={list.has(film_to_string(item))}
+				onChange={() => {
+					if (list.has(film_to_string(item))) {
+						list.delete(film_to_string(item));
+						set_list(new Set(list));
+						fetch(`/api/remove/${list_name}`, {
+							method: 'DELETE',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ film: film_to_string(item) }),
+						});
+					} else {
+						list.add(film_to_string(item));
+						set_list(new Set(list));
+						fetch(`/api/add/${list_name}`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ film: film_to_string(item) }),
+						});
+					}
+				}} />
+		)
+	}
+
 	return (
-		<div className="search-tool">
-			<div className="search-bar">
+		<div className="search-tool component-layer-1">
+			<div className="search-bar component-layer-2">
 				<form onSubmit={handleSubmit}>
 					<input type="text" placeholder="film title" value={search_term} onChange={(event) => set_search_term(event.target.value)} />
 					<button type="submit">Search</button>
 				</form>
 			</div>
-			<div className="search-filter">
+			<div className="search-filter component-layer-2">
 				<h2>Filter</h2>
 				<form>
 					<div className="search-filter-numerical-inputs">
@@ -120,17 +186,13 @@ export default function Search() {
 					</fieldset>
 				</form>
 			</div>
-			<div className="search-results">
+			<div className="search-results component-layer-2">
 				<h2>Results</h2>
 				<table>
 					<thead>
 						<tr>
 							{
-								[{ field: 'title', label: 'Title' },
-								{ field: 'year', label: 'Year' },
-								{ field: 'runtime', label: 'Runtime' },
-								{ field: 'rating', label: 'Rating' },
-								{ field: 'director', label: 'Director' }].map((column) => {
+								columns.map((column) => {
 									return (
 										<th key={column.field}>
 											<button onClick={() => {
@@ -154,6 +216,14 @@ export default function Search() {
 										</th>
 									);
 								})
+							}
+							{
+								is_logged_in &&
+								<th key="add-to">
+									<button type="button" onClick={(event) => {
+										event.preventDefault();
+									}}>Add to</button>
+								</th>
 							}
 						</tr>
 					</thead>
@@ -185,11 +255,20 @@ export default function Search() {
 							}).map((result, index) => {
 								return (
 									<tr key={index}>
-										<td>{result.title}</td>
-										<td>{result.year}</td>
-										<td>{result.runtime}</td>
-										<td>{result.rating}</td>
-										<td>{result.director}</td>
+										{
+											columns.map((column) => {
+												return (
+													<td key={column.field}>{result[column.field]}</td>
+												);
+											})
+										}
+										{
+											is_logged_in &&
+											<td>
+												<AddRemoveButton list={favorites} set_list={set_favorites} list_name="favorites" item={result} />
+												<AddRemoveButton list={watchlist} set_list={set_watchlist} list_name="watchlist" item={result} />
+											</td>
+										}
 									</tr>
 								);
 							})
