@@ -278,15 +278,15 @@
 
 @media (prefers-color-scheme: dark) {
     .add-remove-text {
-        background: #444444;
-    }
-
-    .add-remove-text:hover {
         background: #666666;
     }
 
-    .add-remove-checkbox:checked + .add-remove-text {
+    .add-remove-text:hover {
         background: #888888;
+    }
+
+    .add-remove-checkbox:checked + .add-remove-text {
+        background: #aaaaaa;
         color: black;
     }
     
