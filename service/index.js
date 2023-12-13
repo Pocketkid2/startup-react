@@ -14,11 +14,13 @@ let cookie = require('cookie');
 
 let port = process.argv.length > 2 ? process.argv[2] : 4000;
 
+let frontend_dir = process.argv.length > 3 ? process.argv[3] : 'public';
+
 // Express routing stuff --------------------------------------------------------------------------
 
 app.use(cookie_parser());
 
-app.use(express.static('public'));
+app.use(express.static(frontend_dir));
 
 app.use((req, res, next) => {
     console.log(`\n\n\nRequest received (time = ${new Date(Date.now()).toLocaleString()})`);
@@ -36,7 +38,7 @@ app.use('/api', api_router);
 app.use('/auth', auth_router);
 
 app.use((request, response) => {
-    response.sendFile('index.html', { root: 'public' });
+    response.sendFile('index.html', { root: frontend_dir });
 });
 
 server = app.listen(port, () => {
