@@ -112,6 +112,30 @@ body {
 	padding: 2em;
 }
 
+.component-layer-1 {
+	background: #cccccc;
+	border-radius: 2em;
+	box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
+}
+
+.component-layer-2 {
+	background: #999999;
+	border-radius: .7em;
+    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+	.component-layer-1 {
+		background: #141414;
+		box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
+	}
+
+	.component-layer-2 {
+		background: #2a2a2a;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+	}
+}
+
 /* FOOTER --------------------------------------------------------------------- */
 
 .footer {
