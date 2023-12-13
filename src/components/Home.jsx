@@ -104,11 +104,11 @@ export default function Home() {
 	}
 
 	return (
-		<div className="home-component">
+		<div className="home-component component-layer-1">
 			{
 				curated_data.map((section) => {
 					return (
-						<div className="home-section">
+						<div className="home-section component-layer-2">
 							<h1>{section.header}</h1>
 							<List ids={section.ids} links={section.links} descriptor={section.descriptor}/>
 						</div>

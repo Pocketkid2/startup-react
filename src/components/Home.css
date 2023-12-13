@@ -5,32 +5,12 @@
     align-items: center;
     margin: auto;
     padding: 0;
-    border-radius: 2em;
-    background: #cccccc;
-    box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
-}
-
-@media (prefers-color-scheme: dark) {
-    .home-component {
-        background: #141414;
-        box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
-    }
 }
 
 /* HOME COMPONENT SECTION ----------------------------------------------------- */
 
 .home-section {
     margin: 2em;
-    background: #999999;
-    border-radius: .7em;
-    box-shadow: 0 0 1em rgba(128, 128, 128, 0.8);
-}
-
-@media (prefers-color-scheme: dark) {
-    .home-section {
-        background: #2a2a2a;
-        box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
-    }
 }
 
 .home-section h1 {
