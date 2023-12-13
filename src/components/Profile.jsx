@@ -40,7 +40,7 @@ export default function Profile() {
 
 	function List({ title, data, set_data }) {
 		return (
-			<div>
+			<div className="profile-section component-layer-2">
 				<h2>{title} ({data.length})</h2>
 				<ul>
 					{
@@ -66,7 +66,7 @@ export default function Profile() {
 	}
 
 	return (
-		<div>
+		<div className="profile component-layer-1">
 			<h1>Profile</h1>
 			<List title="Favorites" data={favorites} set_data={set_favorites} />
 			<List title="Watchlist" data={watchlist} set_data={set_watchlist} />
