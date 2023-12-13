@@ -1,0 +1,78 @@
+.profile {
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 0;
+}
+
+.profile h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+.profile-section {
+    margin: 2em;
+}
+
+.profile-section h2 {
+    text-align: center;
+    padding: 1em;
+    font-size: 2.5em;
+    padding-bottom: 0;
+}
+
+.profile-section ul {
+    list-style-type: none;
+    padding: 1em;
+    padding-top: 0;
+}
+
+.profile-section ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .25em;
+    padding-left: .5em;
+    margin: .5em;
+    background: #777777;
+    border-radius: .5em;
+    font-size: 2em;
+}
+
+.profile-section ul li button {
+    font-size: 1.4em;
+    margin-left: 1em;
+    padding: 0 .3em;
+    border-radius: .2em;
+    border: none;
+    background: #555555;
+}
+
+.profile-section ul li button:hover {
+    background: #444444;
+}
+
+.profile-section ul li button:active {
+    background: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .profile-section ul li {
+        background: #444444;
+    }
+
+    .profile-section ul li button {
+        background: #666666;
+        color: white;
+    }
+
+    .profile-section ul li button:hover {
+        background: #777777;
+    }
+
+    .profile-section ul li button:active {
+        background: #888888;
+    }
+}
