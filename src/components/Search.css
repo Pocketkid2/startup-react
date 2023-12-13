@@ -250,3 +250,44 @@
         background: #444444;
     }   
 }
+
+.add-remove-label {
+    display: inline-block;
+    margin: .5em .25em;
+    border: none;
+}
+
+.add-remove-checkbox {
+    display: none;
+}
+
+.add-remove-text {
+    background: #aaaaaa;
+    border-radius: .25em;
+    padding: .25em;
+}
+
+.add-remove-text:hover {
+    background: #888888;
+}
+
+.add-remove-checkbox:checked + .add-remove-text {
+    background: #666666;
+    color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    .add-remove-text {
+        background: #444444;
+    }
+
+    .add-remove-text:hover {
+        background: #666666;
+    }
+
+    .add-remove-checkbox:checked + .add-remove-text {
+        background: #888888;
+        color: black;
+    }
+    
+}
