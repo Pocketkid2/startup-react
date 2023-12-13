@@ -12,22 +12,8 @@ import React from 'react';
 import SimpleForm from './components/SimpleForm';
 import Search from './components/Search'
 import Home from './components/Home'
-
-function Chat() {
-	return (
-		<div>
-			<h1>Chat Component</h1>
-		</div>
-	);
-}
-
-function Profile() {
-	return (
-		<div>
-			<h1>Profile Component</h1>
-		</div>
-	);
-}
+import Profile from './components/Profile'
+import Chat from './components/Chat'
 
 function App() {
 	const [is_logged_in, set_is_logged_in] = React.useState(false);
