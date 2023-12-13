@@ -61,7 +61,7 @@ async function get_list(username, list_name) {
     if (user && user[list_name]) {
         return user[list_name];
     }
-    return null;
+    return [];
 }
 
 async function film_exists(username, list_name, film_name) {
