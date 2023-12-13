@@ -4,6 +4,46 @@ import './Search.css'
 
 import api_keys from '../api_keys.json';
 
+function film_to_string(film) {
+	return `${film.title} (${film.year}) (${film.runtime}) (${film.rating})`;
+}
+
+function AddRemoveButton({ list, set_list, list_name, item }) {
+	return (
+		<label className="add-remove-label">
+			<input
+				className="add-remove-checkbox"
+				type="checkbox"
+				checked={list.has(film_to_string(item))}
+				onChange={() => {
+					const new_list = new Set(list);
+					if (list.has(film_to_string(item))) {
+						new_list.delete(film_to_string(item));
+						fetch(`/api/remove/${list_name}`, {
+							method: 'DELETE',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ film: film_to_string(item) }),
+						});
+					} else {
+						new_list.add(film_to_string(item));
+						fetch(`/api/add/${list_name}`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ film: film_to_string(item) }),
+						});
+					}
+					set_list(new Set(new_list));
+				}} />
+			<span className="add-remove-text">{list_name}</span>
+		</label>
+	)
+}
+
+
 export default function Search({ is_logged_in }) {
 	const [search_results, set_search_results] = React.useState([]);
 	const [search_term, set_search_term] = React.useState('');
@@ -77,9 +117,7 @@ export default function Search({ is_logged_in }) {
 		{ field: 'director', label: 'Director' }
 	];
 
-	function film_to_string(film) {
-		return `${film.title} (${film.year}) (${film.runtime}) (${film.rating})`;
-	}
+	
 
 	React.useEffect(() => {
 		if (is_logged_in) {
@@ -96,41 +134,12 @@ export default function Search({ is_logged_in }) {
 				}
 			}
 
-			get_list('favorites').then((data) => set_favorites(new Set(data.map(film_to_string))));
-			get_list('watchlist').then((data) => set_watchlist(new Set(data.map(film_to_string))));
+			get_list('favorites').then((data) => set_favorites(new Set(data)));
+			get_list('watchlist').then((data) => set_watchlist(new Set(data)));
 		}
-	}, []);
+	}, [is_logged_in]);
 
-	function AddRemoveButton({ list, set_list, list_name, item }) {
-		return (
-			<input
-				type="checkbox"
-				checked={list.has(film_to_string(item))}
-				onChange={() => {
-					if (list.has(film_to_string(item))) {
-						list.delete(film_to_string(item));
-						set_list(new Set(list));
-						fetch(`/api/remove/${list_name}`, {
-							method: 'DELETE',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({ film: film_to_string(item) }),
-						});
-					} else {
-						list.add(film_to_string(item));
-						set_list(new Set(list));
-						fetch(`/api/add/${list_name}`, {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({ film: film_to_string(item) }),
-						});
-					}
-				}} />
-		)
-	}
+
 
 	return (
 		<div className="search-tool component-layer-1">
