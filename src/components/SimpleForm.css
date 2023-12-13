@@ -15,9 +15,6 @@
 	justify-content: center;
 	align-items: center;
 	padding: 1em;
-	border-radius: 2em;
-	box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.3);
-	background: #cccccc;
 }
 
 .simple-form form input {
@@ -55,12 +52,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-	.simple-form form {
-		background: #141414;
-
-		box-shadow: 1em 1em 3em rgba(0, 0, 0, 0.5);
-	}
-
 	.simple-form form input {
 		color: white;
 		border: none;

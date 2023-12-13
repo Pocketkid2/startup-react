@@ -15,7 +15,7 @@ export default function SimpleForm({ form_name, process_submit }) {
 	}
 
 	return (
-		<div className="simple-form">
+		<div className="simple-form component-layer-1">
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="username">Username</label>
 				<input
