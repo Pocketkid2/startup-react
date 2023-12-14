@@ -106,9 +106,9 @@ export default function Home() {
 	return (
 		<div className="home-component component-layer-1">
 			{
-				curated_data.map((section) => {
+				curated_data.map((section, index) => {
 					return (
-						<div className="home-section component-layer-2">
+						<div key={index} className="home-section component-layer-2">
 							<h1>{section.header}</h1>
 							<List ids={section.ids} links={section.links} descriptor={section.descriptor}/>
 						</div>
