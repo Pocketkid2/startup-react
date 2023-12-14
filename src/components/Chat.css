@@ -13,7 +13,7 @@
     margin: 1em;
 }
 
-.chat-section:last-of-type {
+form.chat-section {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -38,6 +38,12 @@
 .chat-subsection {
     max-height: 50vh;
     overflow: auto;
+}
+
+.chat-section p {
+    font-size: 2em;
+    text-align: center;
+    font-style: italic;
 }
 
 .chat-section dt {
