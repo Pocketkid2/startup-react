@@ -142,6 +142,7 @@ setInterval(() => {
             connection.ws.ping();
         } else {
             connection.ws.terminate();
+            console.log(`[WEBSOCKET] Terminating connection to ${connection.username}`);
         }
     });
 }, 10000);
