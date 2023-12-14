@@ -11,17 +11,8 @@ const system_username = "system";
 
 export default function Chat() {
 
-	const [online_users, set_online_users] = React.useState([
-		"guy1",
-		"guy2"
-	]);
-	const [messages, set_messages] = React.useState([
-		{ user: "guy1", text: "hello" },
-		{ user: "system", text: "guy2 has joined the chat" },
-		{ user: "guy2", text: "hi" },
-		{ user: "guy2", text: "how are you?" },
-		{ user: "guy1", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque condimentum elit enim, quis porttitor ligula bibendum ut. Quisque eros lectus, varius quis condimentum sit amet, maximus molestie ligula. Duis vestibulum nunc sed lorem pellentesque suscipit vitae at metus. Donec fringilla imperdiet feugiat. In maximus quam sagittis nisl placerat, ut porta ante sodales. Nulla eleifend quam sed turpis tincidunt condimentum. Aliquam purus nibh, condimentum vitae tempus non, rhoncus sit amet arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent mollis augue lacus, quis consequat augue tempus at. Aenean at velit eget ex lobortis commodo sit amet eget arcu. Vivamus quis nibh at nisi sollicitudin malesuada et sit amet augue. Phasellus et urna quis ex venenatis molestie ut vitae nibh. Nullam feugiat, elit vitae blandit tincidunt, sapien nisi dignissim turpis, quis dictum mi tortor a sapien. Quisque nec dignissim orci. Donec sit amet dapibus odio. " },
-	]);
+	const [online_users, set_online_users] = React.useState([]);
+	const [messages, set_messages] = React.useState([]);
 
 	const socket = React.useRef(null);
 
