@@ -29,7 +29,6 @@ function App() {
 				set_is_logged_in(true);
 			}
 		}
-
 		check_login_status();
 	}, []);
 
@@ -148,7 +147,7 @@ function App() {
 			<main className="main-content">
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/search" element={<Search is_logged_in={is_logged_in}/>} />
+					<Route path="/search" element={<Search is_logged_in={is_logged_in} />} />
 					<Route path="/chat" element={<Chat />} />
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/login" element={<SimpleForm form_name="Login" process_submit={(event) => authenticate(event, false)} />} />
