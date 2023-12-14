@@ -4,11 +4,11 @@
 
 ### Startup React Deliverables
 
-Features removed from previous version (see above repository)
+Features removed in this new React version
  - Signing up no longer requires personal information (change suggested by a tester)
  - Thus, profile no longer shows personal information, only the lists stored in the database
 
-Features added in this new React version (this repository)
+Features added in this new React version
  - Full dark mode support!
  - More and updated displays on the home page!
  - Signing up automatically logs you in as well!
