@@ -105,12 +105,4 @@ auth_router.delete('/logout', async (req, res) => {
     res.status(200).end();
 });
 
-auth_router.get('/list', (req, res) => {
-    console.log("\nListing Users:");
-    data.list_users();
-    console.log("\nListing Tokens:");
-    data.list_tokens();
-    res.end();
-});
-
 module.exports = auth_router;
