@@ -105,22 +105,23 @@ async function user_exists(username) {
     return false;
 }
 
-async function add_user(user_object) {
-    user_object.password = await new Promise((resolve, reject) => {
-        bcrypt.hash(user_object.password, 10, function(err, hash) {
+async function add_user(username, password) {
+    password = await new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, function(err, hash) {
             if (err) reject(err);
             else resolve(hash);
         });
     })
 
-    await user_collection.insertOne(user_object);
-    console.log(`Added user ${user_object.username}`);
+    await user_collection.insertOne({ username: username, password: password });
+    console.log(`Added user ${username}`);
 }
 
 // Attempts to authenticate with the given credentials.
 //  If successful, returns an auth token.
 //  If unsuccessful, returns null.
 async function authenticate_credentials(username, password) {
+    console.log(`Authenticating credentials ${username}:${password}`);
     const user = await user_collection.findOne({ username: username });
     if (user) {
         const result = await bcrypt.compare(password, user.password);

@@ -29,7 +29,7 @@ auth_router.post('/signup', async (req, res) => {
         return;
     }
 
-    await data.add_user(req.body);
+    await data.add_user(req.body.username, req.body.password);
 
     console.log("\tUser signed up, attempting authentication");
 
