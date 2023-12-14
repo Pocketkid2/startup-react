@@ -22,17 +22,21 @@ app.use(cookie_parser());
 
 app.use(express.static(frontend_dir));
 
+app.use(express.json());
+
 app.use((req, res, next) => {
     console.log(`\n\n\nRequest received (time = ${new Date(Date.now()).toLocaleString()})`);
     console.log(`\tMethod: ${req.method}`);
     console.log(`\tURL: ${req.originalUrl}`);
-    console.log(`\tBody: ${JSON.stringify(req.body)}`);
+    if (req.body != undefined) {
+        console.log(`\tBody: ${JSON.stringify(req.body)}`);
+    }
     console.log(`\tCookies: ${JSON.stringify(req.cookies)}`);
     console.log(`\tProtocol: ${req.protocol}`);
     next();
 });
 
-app.use(express.json());
+
 
 app.use('/api', api_router);
 app.use('/auth', auth_router);
