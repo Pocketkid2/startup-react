@@ -74,6 +74,7 @@ function App() {
 		} else {
 			const response_body = await response.text();
 			console.log('Error: ' + response.status, response_body);
+			alert(response_body);
 		}
 	}
 
