@@ -13,7 +13,12 @@ export default defineConfig({
       '/auth': {
         target: 'http://localhost:4000',
         changeOrigin: true,
-      }
+      },
+      '/ws': {
+        target: 'ws://localhost:4000',
+        changeOrigin: true,
+        ws: true,
+      },
     }
   }
 })
